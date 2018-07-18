@@ -2,6 +2,7 @@
 import App from 'fusion-react';
 import {createPlugin, HttpServerToken} from 'fusion-core';
 import Router from 'fusion-plugin-react-router';
+import httpProxy from 'http-proxy';
 
 import root from './root.js';
 
@@ -19,31 +20,43 @@ export default () => {
         },
         middleware: ({httpServer}) => {
           return async (ctx, next) => {
-            const wsServer = new WebSocketServer({
-              httpServer: httpServer,
+            var proxy = new httpProxy.createProxyServer({
+              target: {
+                host: 'localhost',
+                port: 3001,
+              },
+              ws: true,
             });
 
-            wsServer.on('request', function(request) {
-              var connection = request.accept(null, request.origin);
-
-              // This is the most important callback for us, we'll handle
-              // all messages from users here.
-              connection.on('message', function(message) {
-                console.log('Got message from client', message);
-                if (message.type === 'utf8') {
-                  // process WebSocket message
-                }
-              });
-
-              connection.sendUTF(
-                JSON.stringify({type: 'message', data: 'foobar'})
-              );
-
-              connection.on('close', function(connection) {
-                console.log('Connection closed');
-                // close user connection
-              });
+            httpServer.on('upgrade', function(req, socket, head) {
+              proxy.ws(req, socket, head);
             });
+
+            // const wsServer = new WebSocketServer({
+            //   httpServer: httpServer,
+            // });
+
+            // wsServer.on('request', function(request) {
+            //   var connection = request.accept(null, request.origin);
+
+            //   // This is the most important callback for us, we'll handle
+            //   // all messages from users here.
+            //   connection.on('message', function(message) {
+            //     console.log('Got message from client', message);
+            //     if (message.type === 'utf8') {
+            //       // process WebSocket message
+            //     }
+            //   });
+
+            //   connection.sendUTF(
+            //     JSON.stringify({type: 'message', data: 'foobar'})
+            //   );
+
+            //   connection.on('close', function(connection) {
+            //     console.log('Connection closed');
+            //     // close user connection
+            //   });
+            // });
 
             // do middleware things...
             //             httpServer.on('upgrade', (req, socket, head) => {
