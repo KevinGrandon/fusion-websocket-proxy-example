@@ -1,4 +1,4 @@
-# websocket-proxy-koa
+# fusion-websocket-proxy-example
 
 Demonstration of proxying websockets with koa.
 
