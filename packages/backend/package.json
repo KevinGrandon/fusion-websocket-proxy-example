@@ -11,6 +11,7 @@
     "http-proxy": "^1.17.0",
     "koa": "^2.5.2",
     "koa-router": "^7.4.0",
-    "koa-websocket": "^5.0.1"
+    "koa-websocket": "^5.0.1",
+    "websocket": "^1.0.26"
   }
 }
