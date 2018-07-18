@@ -1,0 +1,16 @@
+{
+  "name": "websocket-proxy-koa-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kevin Grandon <kevingrandon@yahoo.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "http-proxy": "^1.17.0",
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0",
+    "koa-websocket": "^5.0.1"
+  }
+}
