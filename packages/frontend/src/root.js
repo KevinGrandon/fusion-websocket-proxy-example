@@ -9,7 +9,7 @@ import PageNotFound from './pages/pageNotFound.js';
 
 class Root extends React.Component {
   componentDidMount() {
-    const socket = new WebSocket('ws://localhost:3000');
+    const socket = new WebSocket('ws://localhost:3000/.websocket');
 
     // Connection opened
     socket.addEventListener('open', function(event) {

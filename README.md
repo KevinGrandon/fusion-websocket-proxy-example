@@ -1,6 +1,11 @@
 # fusion-websocket-proxy-example
 
-Demonstration of proxying websockets with koa.
+Demonstration of proxying websockets with koa. This example is useful for the following:
+
+- Understanding how to use the HttpServerToken with Fusion.js.
+- Using websockets with the Fusion.js frontend.
+- Proxying websockets from within Fusion.js.
+- Handling websocket messages in Fusion.js.
 
 ## Architecture
 
